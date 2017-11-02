@@ -6,7 +6,26 @@ RUN apt-get update && apt-get install -y \
         curl \
         wget \
         unzip \
-        git
+        ssh
+
+# Install git 2.7.4
+RUN apt-get update && apt-get install -y \
+        build-essential \
+        zlib1g \
+        zlib1g-dev \
+        libcurl4-gnutls-dev \
+        libexpat1-dev \
+        gettext \
+        libz-dev \
+        libssl-dev
+
+RUN mkdir /tmp/git && cd /tmp/git && \
+        wget https://www.kernel.org/pub/software/scm/git/git-2.7.4.tar.gz && \
+        tar -zxf git-2.7.4.tar.gz && \
+        cd git-2.7.4 && \
+        make prefix=/usr/local all && \
+        make prefix=/usr/local install
+
 
 # Memcached
 RUN apt-get update && apt-get install -y libz-dev libmemcached-dev
@@ -34,6 +53,7 @@ ADD ./php.ini /usr/local/etc/php/
 # Add a non-root user to prevent files being created with root permissions on host machine.
 ARG GID
 RUN usermod -u ${GID} www-data
+
 
 WORKDIR "/var/www"
 

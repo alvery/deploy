@@ -5,4 +5,4 @@ build/builds
 build/sandbox
 build/data/
 build/locks/
-build/projects
+build/projects/*
