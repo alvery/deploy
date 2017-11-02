@@ -1,0 +1,19 @@
+version: '2'
+services:
+    nginx:
+        build:
+            context: ./docker/nginx
+        volumes:
+            - ./builder:/var/www
+        ports:
+            - "80:80"
+        links:
+            - php
+    php:
+        build:
+            context: ./docker/php
+            args:
+              - GID=1000 # Map current user group to docker
+        volumes:
+            - ./builder:/var/www
+            - /opt/projects/deploy/log/php-fpm:/var/log/php-fpm

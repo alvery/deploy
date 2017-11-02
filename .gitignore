@@ -1,7 +1,8 @@
 .idea/
-/logs/*
-!/logs/readme.txt
-/builds
-/sandbox
-data/
-locks/
+build/logs/*
+!build/logs/readme.txt
+build/builds
+build/sandbox
+build/data/
+build/locks/
+build/projects
